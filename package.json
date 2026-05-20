@@ -1,0 +1,12 @@
+{
+  "name": "backendtsprod",
+  "version": "1.0.0",
+  "description": "Production grade typescript backend microservice",
+  "license": "ISC",
+  "author": "Deepak Rajveer Singh",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
