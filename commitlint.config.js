@@ -1,6 +1,6 @@
 /** @type {import('@commitlint/types').UserConfig} */
 module.exports = {
-    extends: ['@commitlint/config-conventional'],
+    extends: ["@commitlint/config-conventional"],
 
     /*
      * Production-grade commitlint configuration
@@ -20,26 +20,26 @@ module.exports = {
          * ----------------------------------------------------------------
          */
 
-        'type-enum': [
+        "type-enum": [
             2,
-            'always',
+            "always",
             [
-                'feat',      // new feature
-                'fix',       // bug fix
-                'docs',      // documentation
-                'style',     // formatting/style only
-                'refactor',  // code restructuring
-                'perf',      // performance improvements
-                'test',      // tests
-                'build',     // build system/dependencies
-                'ci',        // CI/CD changes
-                'chore',     // maintenance
-                'revert'     // revert commits
-            ]
+                "feat", // new feature
+                "fix", // bug fix
+                "docs", // documentation
+                "style", // formatting/style only
+                "refactor", // code restructuring
+                "perf", // performance improvements
+                "test", // tests
+                "build", // build system/dependencies
+                "ci", // CI/CD changes
+                "chore", // maintenance
+                "revert", // revert commits
+            ],
         ],
 
-        'type-case': [2, 'always', 'lower-case'],
-        'type-empty': [2, 'never'],
+        "type-case": [2, "always", "lower-case"],
+        "type-empty": [2, "never"],
 
         /**
          * ----------------------------------------------------------------
@@ -47,31 +47,14 @@ module.exports = {
          * ----------------------------------------------------------------
          */
 
-        'scope-case': [2, 'always', 'lower-case'],
-        'scope-empty': [2, 'never'],
+        "scope-case": [2, "always", "lower-case"],
+        "scope-empty": [2, "never"],
 
-        'scope-enum': [
+        "scope-enum": [
             2,
-            'always',
-            [
-                'api',
-                'auth',
-                'ui',
-                'database',
-                'config',
-                'deps',
-                'build',
-                'ci',
-                'docker',
-                'k8s',
-                'infra',
-                'security',
-                'docs',
-                'tests',
-                'release'
-            ]
+            "always",
+            ["api", "auth", "ui", "database", "config", "deps", "build", "ci", "docker", "k8s", "infra", "security", "docs", "tests", "release"],
         ],
-        
 
         /**
          * ----------------------------------------------------------------
@@ -79,22 +62,13 @@ module.exports = {
          * ----------------------------------------------------------------
          */
 
-        'subject-empty': [2, 'never'],
+        "subject-empty": [2, "never"],
 
         // sentence should not end with period
-        'subject-full-stop': [2, 'never', '.'],
+        "subject-full-stop": [2, "never", "."],
 
         // enforce lowercase subject
-        'subject-case': [
-            2,
-            'never',
-            [
-                'sentence-case',
-                'start-case',
-                'pascal-case',
-                'upper-case'
-            ]
-        ],
+        "subject-case": [2, "never", ["sentence-case", "start-case", "pascal-case", "upper-case"]],
 
         /**
          * ----------------------------------------------------------------
@@ -102,7 +76,7 @@ module.exports = {
          * ----------------------------------------------------------------
          */
 
-        'header-max-length': [2, 'always', 100],
+        "header-max-length": [2, "always", 100],
 
         /**
          * ----------------------------------------------------------------
@@ -110,8 +84,8 @@ module.exports = {
          * ----------------------------------------------------------------
          */
 
-        'body-leading-blank': [1, 'always'],
-        'body-max-line-length': [2, 'always', 120],
+        "body-leading-blank": [1, "always"],
+        "body-max-line-length": [2, "always", 120],
 
         /**
          * ----------------------------------------------------------------
@@ -119,18 +93,18 @@ module.exports = {
          * ----------------------------------------------------------------
          */
 
-        'footer-leading-blank': [1, 'always'],
-        'footer-max-line-length': [2, 'always', 120]
+        "footer-leading-blank": [1, "always"],
+        "footer-max-line-length": [2, "always", 120],
     },
 
     /*
      * Ignore automated version bumps/releases
      */
     ignores: [
-        (message) => message.startsWith('Merge branch'),
-        (message) => message.startsWith('Merge pull request'),
-        (message) => message.startsWith('Release '),
-        (message) => /^v\d+\.\d+\.\d+$/.test(message)
+        (message) => message.startsWith("Merge branch"),
+        (message) => message.startsWith("Merge pull request"),
+        (message) => message.startsWith("Release "),
+        (message) => /^v\d+\.\d+\.\d+$/.test(message),
     ],
 
     /*
@@ -138,14 +112,14 @@ module.exports = {
      */
     parserPreset: {
         parserOpts: {
-            issuePrefixes: ['#']
-        }
+            issuePrefixes: ["#"],
+        },
     },
 
     /*
      * Default formatter
      */
-    formatter: '@commitlint/format',
+    formatter: "@commitlint/format",
 
     /*
      * Helpful prompt support (works with @commitlint/prompt)
@@ -154,54 +128,54 @@ module.exports = {
         settings: {},
 
         messages: {
-            skip: ':skip',
-            max: 'upper %d chars',
-            min: 'at least %d chars',
-            emptyWarning: 'cannot be empty',
-            upperLimitWarning: 'over limit',
-            lowerLimitWarning: 'below limit'
+            skip: ":skip",
+            max: "upper %d chars",
+            min: "at least %d chars",
+            emptyWarning: "cannot be empty",
+            upperLimitWarning: "over limit",
+            lowerLimitWarning: "below limit",
         },
 
         questions: {
             type: {
-                description: 'Select the type of change that you are committing'
+                description: "Select the type of change that you are committing",
             },
 
             scope: {
-                description: 'What is the scope of this change?'
+                description: "What is the scope of this change?",
             },
 
             subject: {
-                description: 'Write a short, imperative tense description'
+                description: "Write a short, imperative tense description",
             },
 
             body: {
-                description: 'Provide a longer description of the change'
+                description: "Provide a longer description of the change",
             },
 
             isBreaking: {
-                description: 'Are there any breaking changes?'
+                description: "Are there any breaking changes?",
             },
 
             breakingBody: {
-                description: 'Describe the breaking changes'
+                description: "Describe the breaking changes",
             },
 
             breaking: {
-                description: 'Describe the breaking changes'
+                description: "Describe the breaking changes",
             },
 
             isIssueAffected: {
-                description: 'Does this change affect any open issues?'
+                description: "Does this change affect any open issues?",
             },
 
             issuesBody: {
-                description: 'Add issue references'
+                description: "Add issue references",
             },
 
             issues: {
-                description: 'Add issue references (e.g. "fix #123")'
-            }
-        }
-    }
+                description: 'Add issue references (e.g. "fix #123")',
+            },
+        },
+    },
 };

@@ -1,41 +1,41 @@
 {
-  "name": "backendtsprod",
-  "version": "1.0.0",
-  "description": "Production grade typescript backend microservice",
-  "license": "ISC",
-  "author": "Deepak Rajveer Singh",
-  "type": "commonjs",
-  "main": "dist/server.js",
-  "scripts": {
-    "dist": "npx tsc",
-    "dev": "nodemon src/server.ts",
-    "start": "node dist/server.js",
-    "lint": "eslint . --ext .js,.ts",
-    "lint:fix": "eslint . --ext .js,.ts --fix",
-    "format:check": "prettier --check .",
-    "format:fix": "prettier --write .",
-    "prepare": "husky"
-  },
-  "lint-staged": {
-    "*.{js,ts}": [
-      "npm run lint:fix",
-      "npm run format:fix"
-    ]
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^21.0.1",
-    "@commitlint/config-conventional": "^21.0.1",
-    "@eslint/js": "^10.0.1",
-    "@types/node": "^25.9.1",
-    "eslint": "^10.4.0",
-    "eslint-config-prettier": "^10.1.8",
-    "globals": "^17.6.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
-    "nodemon": "^3.1.14",
-    "prettier": "3.8.3",
-    "ts-node": "^10.9.2",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.4"
-  }
+    "name": "backendtsprod",
+    "version": "1.0.0",
+    "description": "Production grade typescript backend microservice",
+    "license": "ISC",
+    "author": "Deepak Rajveer Singh",
+    "type": "commonjs",
+    "main": "dist/server.js",
+    "scripts": {
+        "dist": "npx tsc",
+        "dev": "nodemon src/server.ts",
+        "start": "node dist/server.js",
+        "lint": "eslint . --ext .js,.ts",
+        "lint:fix": "eslint . --ext .js,.ts --fix",
+        "format:check": "prettier --check .",
+        "format:fix": "prettier --write .",
+        "prepare": "husky"
+    },
+    "lint-staged": {
+        "*.{js,ts}": [
+            "npm run lint:fix",
+            "npm run format:fix"
+        ]
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^21.0.1",
+        "@commitlint/config-conventional": "^21.0.1",
+        "@eslint/js": "^10.0.1",
+        "@types/node": "^25.9.1",
+        "eslint": "^10.4.0",
+        "eslint-config-prettier": "^10.1.8",
+        "globals": "^17.6.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.4.0",
+        "nodemon": "^3.1.14",
+        "prettier": "3.8.3",
+        "ts-node": "^10.9.2",
+        "typescript": "^6.0.3",
+        "typescript-eslint": "^8.59.4"
+    }
 }
