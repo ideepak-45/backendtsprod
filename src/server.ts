@@ -1,2 +1,3 @@
-console.log("Hello from ESLint!");
-console.log("Hello from Prettier!");
+import { config } from "./config/config";
+
+console.log(config);
