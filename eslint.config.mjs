@@ -11,7 +11,13 @@ export default defineConfig([
     eslintConfigPrettier,
     {
         rules: {
-            "no-unused-vars": "error",
+            "no-unused-vars": "off",
+            "@typescript-eslint/no-unused-vars": [
+                "error",
+                {
+                    argsIgnorePattern: "^_",
+                },
+            ],
             "no-undef": "error",
             "no-console": "warn",
         },
