@@ -3,15 +3,31 @@ import { ConsoleTransportInstance, FileTransportInstance } from "winston/lib/win
 import util from "util";
 import { config } from "../config/config";
 import path from "path";
+import { red, yellow, blue, green, magenta, cyanBright } from "colorette";
 import * as sourceMapSupport from "source-map-support";
 
 // Enable source map support for better stack traces
 sourceMapSupport.install();
 
+const colorizeLevel = (level: string): string => {
+    switch (level) {
+        case "ERROR":
+            return red(level);
+        case "WARN":
+            return yellow(level);
+        case "INFO":
+            return green(level);
+        case "DEBUG":
+            return blue(level);
+        default:
+            return level;
+    }
+};
+
 const consoleLogFormat = format.printf((data) => {
     const { timestamp, level, message, meta = {} } = data;
     const metaString = util.inspect(meta, { depth: null, colors: true, showHidden: false });
-    return `${timestamp} [${level.toUpperCase()}]: ${message}\nMETA ${metaString}\n`;
+    return `${cyanBright(timestamp as string)} [${colorizeLevel(level.toUpperCase())}]: ${message}\n${magenta("META")} ${metaString}\n`;
 });
 
 const consoleTransport = (): Array<ConsoleTransportInstance> => {
