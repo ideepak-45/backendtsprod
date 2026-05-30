@@ -53,7 +53,24 @@ module.exports = {
         "scope-enum": [
             2,
             "always",
-            ["api", "auth", "ui", "database", "config", "deps", "build", "ci", "docker", "k8s", "infra", "security", "docs", "tests", "release"],
+            [
+                "api",
+                "auth",
+                "ui",
+                "database",
+                "config",
+                "deps",
+                "build",
+                "ci",
+                "docker",
+                "k8s",
+                "infra",
+                "security",
+                "docs",
+                "tests",
+                "release",
+                "logs",
+            ],
         ],
 
         /**
