@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { THttpResponse } from "../types/types";
 import { config } from "../config/config";
 import { EApplicationEnvironment } from "../constant/application";
+import { logger } from "./logger";
 
 export default (req: Request, res: Response, responseStatusCode: number, responseMessage: string, data: unknown = null): void => {
     const response: THttpResponse = {
@@ -17,7 +18,7 @@ export default (req: Request, res: Response, responseStatusCode: number, respons
     };
 
     // log
-    console.log(`HTTP RESPONSE { meta: { endpoint: ${req.originalUrl} } response: ${JSON.stringify(response)} }`);
+    logger.info(`HTTP RESPONSE { meta: { endpoint: ${req.originalUrl} } response: ${JSON.stringify(response)} }`);
 
     // production Environment: remove ip from response
     if (config.NODE_ENV === EApplicationEnvironment.PRODUCTION) {

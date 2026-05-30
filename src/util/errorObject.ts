@@ -3,6 +3,7 @@ import { config } from "../config/config";
 import { EApplicationEnvironment } from "../constant/application";
 import responseMessage from "../constant/responseMessage";
 import { THttpError } from "../types/types";
+import { logger } from "./logger";
 
 export default (err: Error | unknown, req: Request, errorStatusCode: number = 500): THttpError => {
     const errorObject: THttpError = {
@@ -19,7 +20,7 @@ export default (err: Error | unknown, req: Request, errorStatusCode: number = 50
     };
 
     // log
-    console.error(`HTTP ERROR { meta: { endpoint: ${req.originalUrl} } error: ${JSON.stringify(errorObject)} }`);
+    logger.error(`HTTP ERROR`, { meta: { endpoint: req.originalUrl }, error: errorObject });
 
     // production Environment: remove ip from response
     if (config.NODE_ENV === EApplicationEnvironment.PRODUCTION) {
