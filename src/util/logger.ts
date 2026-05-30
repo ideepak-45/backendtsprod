@@ -5,6 +5,8 @@ import { config } from "../config/config";
 import path from "path";
 import { red, yellow, blue, green, magenta, cyanBright } from "colorette";
 import * as sourceMapSupport from "source-map-support";
+import "winston-mongodb";
+import { MongoDBTransportInstance } from "winston-mongodb";
 
 // Enable source map support for better stack traces
 sourceMapSupport.install();
@@ -84,9 +86,26 @@ const fileTransport = (): Array<FileTransportInstance> => {
     return [];
 };
 
+const mongoDBTransport = (): Array<MongoDBTransportInstance> => {
+    if (config.NODE_ENV === "development") {
+        return [
+            new transports.MongoDB({
+                db: config.MONGODB_URI,
+                collection: "logs",
+                metaKey: "meta",
+                options: { useNewUrlParser: true, useUnifiedTopology: true },
+                level: "info",
+                expireAfterSeconds: 60 * 60 * 24 * 7, // 7 days
+            }),
+        ];
+    }
+
+    return [];
+};
+
 export const logger = createLogger({
     defaultMeta: {
         meta: {},
     },
-    transports: [...fileTransport(), ...consoleTransport()],
+    transports: [...fileTransport(), ...consoleTransport(), ...mongoDBTransport()],
 });
