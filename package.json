@@ -14,7 +14,9 @@
         "lint:fix": "eslint . --ext .js,.ts --fix",
         "format:check": "prettier --check .",
         "format:fix": "prettier --write .",
-        "prepare": "husky"
+        "prepare": "husky",
+        "migrate:dev": "cross-env MIGRATE_MODE=development ts-node script/mongooseModelMigration.ts",
+        "migrate:prod": "cross-env MIGRATE_MODE=production ts-node script/mongooseModelMigration.ts"
     },
     "lint-staged": {
         "*.{js,ts}": [
@@ -47,6 +49,7 @@
         "express": "^5.2.1",
         "mongoose": "^9.6.3",
         "source-map-support": "^0.5.21",
+        "ts-migrate-mongoose": "^5.3.3",
         "winston": "^3.19.0",
         "winston-mongodb": "^7.0.1"
     }
