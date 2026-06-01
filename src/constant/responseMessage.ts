@@ -10,4 +10,5 @@ export default {
     INTERNAL_SERVER_ERROR: "An unexpected error occurred on the server.",
     NOT_FOUND: (entity: string) => `${entity} not found.`,
     VALIDATION_ERROR: (field: string) => `Validation failed for field: ${field}.`,
+    RATE_LIMIT_EXCEEDED: "Too many requests. Please try again later.",
 };
