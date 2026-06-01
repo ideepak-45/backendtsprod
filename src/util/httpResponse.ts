@@ -18,7 +18,7 @@ export default (req: Request, res: Response, responseStatusCode: number, respons
     };
 
     // log
-    logger.info(`HTTP RESPONSE { meta: { endpoint: ${req.originalUrl} } response: ${JSON.stringify(response)} }`);
+    logger.info(`HTTP RESPONSE`, { meta: { endpoint: req.originalUrl, response: JSON.stringify(response) } });
 
     // production Environment: remove ip from response
     if (config.NODE_ENV === EApplicationEnvironment.PRODUCTION) {

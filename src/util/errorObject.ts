@@ -20,7 +20,7 @@ export default (err: Error | unknown, req: Request, errorStatusCode: number = 50
     };
 
     // log
-    logger.error(`HTTP ERROR`, { meta: { endpoint: req.originalUrl }, error: errorObject });
+    logger.error(`HTTP ERROR`, { meta: { endpoint: req.originalUrl, error: errorObject } });
 
     // production Environment: remove ip from response
     if (config.NODE_ENV === EApplicationEnvironment.PRODUCTION) {
