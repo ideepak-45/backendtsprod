@@ -7,6 +7,7 @@ import { red, yellow, blue, green, magenta, cyanBright } from "colorette";
 import * as sourceMapSupport from "source-map-support";
 import "winston-mongodb";
 import { MongoDBTransportInstance } from "winston-mongodb";
+import { EApplicationEnvironment } from "../constant/application";
 
 // Enable source map support for better stack traces
 sourceMapSupport.install();
@@ -33,7 +34,11 @@ const consoleLogFormat = format.printf((data) => {
 });
 
 const consoleTransport = (): Array<ConsoleTransportInstance> => {
-    if (config.NODE_ENV === "development") {
+    if (
+        config.NODE_ENV === EApplicationEnvironment.DEVELOPMENT ||
+        config.NODE_ENV === EApplicationEnvironment.PRODUCTION ||
+        config.NODE_ENV === EApplicationEnvironment.TESTING
+    ) {
         return [
             new transports.Console({
                 level: "info",
@@ -73,7 +78,7 @@ const fileLogFormat = format.printf((data) => {
 });
 
 const fileTransport = (): Array<FileTransportInstance> => {
-    if (config.NODE_ENV === "development") {
+    if (config.NODE_ENV === EApplicationEnvironment.DEVELOPMENT) {
         return [
             new transports.File({
                 filename: path.join(__dirname, `../../logs/${config.NODE_ENV}.log`),
@@ -87,7 +92,7 @@ const fileTransport = (): Array<FileTransportInstance> => {
 };
 
 const mongoDBTransport = (): Array<MongoDBTransportInstance> => {
-    if (config.NODE_ENV === "development") {
+    if (config.NODE_ENV === EApplicationEnvironment.DEVELOPMENT) {
         return [
             new transports.MongoDB({
                 db: config.MONGODB_URI,
