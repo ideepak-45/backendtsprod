@@ -51,5 +51,7 @@
         "skipLibCheck": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true
-    }
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", "dist", "migrations", "script"]
 }
