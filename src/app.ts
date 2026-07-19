@@ -31,7 +31,7 @@ const ignoredPaths = ["/favicon.ico", "/robots.txt", "/.well-known/appspecific/c
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     if (ignoredPaths.includes(req.originalUrl)) {
-        httpResponse(req, res, 204, responseMessage.NO_CONTENT);
+        httpResponse(req, res, responseMessage.NO_CONTENT);
     } else {
         next();
     }
@@ -40,9 +40,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction) => {
     try {
-        throw new Error(responseMessage.NOT_FOUND("route"));
+        throw new Error(responseMessage.NOT_FOUND("route").message);
     } catch (error) {
-        httpError(next, req, error, 404);
+        httpError(next, req, error, responseMessage.NOT_FOUND("route"));
     }
 });
 

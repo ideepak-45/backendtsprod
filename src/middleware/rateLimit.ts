@@ -23,6 +23,6 @@ export default (req: Request, _: Response, next: NextFunction): void => {
         })
         .catch((error) => {
             logger.error("Rate limit exceeded", { meta: { ip: req.ip, error } });
-            httpError(next, req, new Error(responseMessage.RATE_LIMIT_EXCEEDED), 429);
+            httpError(next, req, new Error(responseMessage.RATE_LIMIT_EXCEEDED.message), responseMessage.RATE_LIMIT_EXCEEDED);
         });
 };

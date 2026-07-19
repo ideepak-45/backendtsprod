@@ -2,21 +2,23 @@ import { Request } from "express";
 import { config } from "../config/config";
 import { EApplicationEnvironment } from "../constant/application";
 import responseMessage from "../constant/responseMessage";
-import { THttpError } from "../types/types";
+import { THttpError, TErrorMeta } from "../types/types";
 import { logger } from "./logger";
 
-export default (err: Error | unknown, req: Request, errorStatusCode: number = 500): THttpError => {
+export default (err: Error | unknown, req: Request, errorMeta: TErrorMeta): THttpError => {
     const errorObject: THttpError = {
         success: false,
-        statusCode: errorStatusCode,
+        code: errorMeta.code,
+        statusCode: errorMeta.statusCode,
+        retryable: errorMeta.retryable,
         request: {
             ip: req.ip || null,
             method: req.method,
             url: req.originalUrl,
         },
-        message: err instanceof Error ? err.message || responseMessage.SOME_ERROR_OCCURRED : responseMessage.SOME_ERROR_OCCURRED,
+        message: err instanceof Error ? err.message : errorMeta.message || errorMeta.message,
         data: null,
-        trace: err instanceof Error ? { name: err.name, stack: err.stack } : null,
+        stacktrace: err instanceof Error ? { name: err.name, stack: err.stack } : null,
     };
 
     // log
@@ -24,8 +26,10 @@ export default (err: Error | unknown, req: Request, errorStatusCode: number = 50
 
     // production Environment: remove ip from response
     if (config.NODE_ENV === EApplicationEnvironment.PRODUCTION) {
+        errorObject.message =
+            errorObject.statusCode >= 500 && err instanceof Error ? responseMessage.INTERNAL_SERVER_ERROR.message : errorObject.message;
         delete errorObject.request.ip;
-        delete errorObject.trace;
+        delete errorObject.stacktrace;
     }
 
     return errorObject;

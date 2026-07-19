@@ -1,19 +1,20 @@
 import { Request, Response } from "express";
-import { THttpResponse } from "../types/types";
+import { THttpResponse, TResponseMeta } from "../types/types";
 import { config } from "../config/config";
 import { EApplicationEnvironment } from "../constant/application";
 import { logger } from "./logger";
 
-export default (req: Request, res: Response, responseStatusCode: number, responseMessage: string, data: unknown = null): void => {
+export default (req: Request, res: Response, responseMeta: TResponseMeta, data: unknown = null): void => {
     const response: THttpResponse = {
-        success: responseStatusCode >= 200 && responseStatusCode < 300,
-        statusCode: responseStatusCode,
+        success: responseMeta.statusCode >= 200 && responseMeta.statusCode < 300,
+        code: responseMeta.code,
+        statusCode: responseMeta.statusCode,
         request: {
             ip: req.ip || null,
             method: req.method,
             url: req.originalUrl,
         },
-        message: responseMessage,
+        message: responseMeta.message,
         data: data,
     };
 
@@ -25,5 +26,5 @@ export default (req: Request, res: Response, responseStatusCode: number, respons
         delete response.request.ip;
     }
 
-    res.status(responseStatusCode).json(response);
+    res.status(responseMeta.statusCode).json(response);
 };

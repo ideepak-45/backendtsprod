@@ -1,5 +1,6 @@
 export type THttpResponse = {
     success: boolean;
+    code: string;
     statusCode: number;
     request: {
         ip?: string | null;
@@ -12,7 +13,9 @@ export type THttpResponse = {
 
 export type THttpError = {
     success: boolean;
+    code: string;
     statusCode: number;
+    retryable: boolean;
     request: {
         ip?: string | null;
         method: string;
@@ -20,5 +23,19 @@ export type THttpError = {
     };
     message: string;
     data: unknown;
-    trace?: object | null;
+    stacktrace?: object | null;
+};
+
+export type TResponseMeta = {
+    code: string;
+    statusCode: number;
+    retryable: boolean;
+    message: string;
+};
+
+export type TErrorMeta = {
+    code: string;
+    statusCode: number;
+    retryable: boolean;
+    message: string;
 };
