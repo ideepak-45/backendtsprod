@@ -8,6 +8,7 @@ import responseMessage from "./constant/responseMessage";
 import helmet from "helmet";
 import cors from "cors";
 import { config } from "./config/config";
+import { traceStorage } from "./util/logger";
 
 const app: Application = express();
 
@@ -22,6 +23,19 @@ app.use(
 );
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../", "public")));
+
+// Inject traceId in logs
+app.use((req: Request, res: Response, next: NextFunction) => {
+    // Read an incoming cloud/gateway trace header, or create a fresh UUID
+    const traceId = (req.headers["x-trace-id"] as string) || crypto.randomUUID();
+
+    res.setHeader("x-trace-id", traceId);
+
+    // Wrap execution inside the storage scope context
+    traceStorage.run({ traceId }, () => {
+        next();
+    });
+});
 
 // Routes
 app.use("/api", router);
