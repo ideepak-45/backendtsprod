@@ -6,6 +6,13 @@ export default {
         message: "The request was successful.",
     },
 
+    MAX_DEVICE_LIMIT_REACHED: (limit: number) => ({
+        code: "MAX_DEVICE_LIMIT_REACHED",
+        statusCode: 409,
+        retryable: false,
+        message: `Maximum device login limit reached. You can only have ${limit} active device(s).`,
+    }),
+
     CREATED: {
         code: "CREATED",
         statusCode: 201,
